@@ -10,20 +10,18 @@ int main(){
         low.push_back(temp);
     }
 
-    int first_sum = accumulate(low.begin(), low.end(), 0);
-    for (int i = 0; i < 7; i++){
-        for (int j = i + 1; j < 9; j++){
-            int sum = first_sum - low[i] - low[j];
-            if (sum == 100){
-                low.erase(low.begin() + j);
-                low.erase(low.begin() + i);
-                goto EXIT;
-            }
-        }
-    }
-
-EXIT:   
     sort(low.begin(), low.end());
-    for(auto it : low) cout << it << "\n";
+    do{
+        int temp_sum = 0;
+        for(int i = 0; i < 7; i++){
+            temp_sum += low[i];
+        }
+        if(temp_sum == 100){
+            for(int i = 0; i < 7; i++){
+                cout << low[i] << "\n";
+            }
+            break;
+        }
+    }while(next_permutation(low.begin(), low.end()));
     return 0;
 }
